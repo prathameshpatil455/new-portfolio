@@ -20,6 +20,34 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background-color: #0ea5e9; /* Blue color */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+/* Cursor styles */
+.custom-cursor .outer {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+.custom-cursor .inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

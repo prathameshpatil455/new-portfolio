@@ -1,11 +1,31 @@
+"use client";
+
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { toggleTheme } from "@/store/themeSlice";
+import { useDispatch } from "react-redux";
+
+interface NavItem {
+  id: number;
+  label: string;
+  path: string;
+}
+
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const dispatch = useDispatch();
+  const isDarkMode = useSelector((state: { theme: { isDarkMode: boolean }}) => state.theme.isDarkMode);
 
-  const labels = [
+  console.log(isDarkMode, "this is reduz");
+
+  const handleToggleTheme = () => {
+    dispatch(toggleTheme());
+  };
+
+  const labels: NavItem[] = [
     { id: 1, label: "home", path: "#home" },
     { id: 2, label: "about", path: "#about" },
     { id: 3, label: "portfolio", path: "#portfolio" },
@@ -14,7 +34,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="flex justify-between items-center w-full h-20 px-4 text-black bg-white fixed z-10 shadow-lg">
+    <nav className={`flex justify-between items-center w-full h-20 px-4 fixed z-10 shadow-lg ${isDarkMode ? 'text-white bg-black': 'text-black bg-white'}`}>
       <div>
         <h1 className="text-5xl font-signature ml-2">Prathamesh</h1>
       </div>
@@ -31,6 +51,10 @@ const Navbar = () => {
           </li>
         ))}
       </ul>
+
+        <button onClick={handleToggleTheme}>
+          Switch to { isDarkMode ? 'light Mode' : 'Dark Mode'}
+        </button>
 
       <div
         onClick={() => setNav(!nav)}
@@ -51,7 +75,7 @@ const Navbar = () => {
           ))}
         </ul>
       )}
-    </div>
+    </nav>
   );
 };
 

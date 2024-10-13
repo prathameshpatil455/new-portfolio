@@ -1,0 +1,18 @@
+The frameworks we will use in our project are
+
+ - TypeScript
+ - Tailwind CSS and additional if needed
+ - Framer Motion
+ - Next.js
+ - Vercel ( for deployment )
+
+ additional frameworks to improve my project
+
+ - Three.js ( to have some 3d design )
+ - smooth scrolling ( GSAP and )
+ - Dark and light mode
+ - custom cursor 
+
+https://blog.codepen.io/2024/08/18/exploring-21-unique-custom-cursors-for-your-site/
+
+for cursors
