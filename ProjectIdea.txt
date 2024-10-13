@@ -1,7 +1,7 @@
 The frameworks we will use in our project are
 
- - TypeScript
- - Tailwind CSS and additional if needed
+ - TypeScript = inProgress
+ - Tailwind CSS and additional if needed = inProgress
  - Framer Motion
  - Next.js
  - Vercel ( for deployment )

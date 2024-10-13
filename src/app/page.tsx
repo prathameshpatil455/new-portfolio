@@ -10,8 +10,11 @@ import Contact from "./contact/Contact";
 import CustomCursor from "@/components/CustomCursor/CustomCursor";
 import { Provider } from "react-redux";
 import store from "@/store/store";
+import useLenis from "@/hooks/useLenis";
 
 export default function Home() {
+
+  useLenis();
   
   return (
     <Provider store={store}>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -25,6 +25,15 @@ const Navbar = () => {
     dispatch(toggleTheme());
   };
 
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+  
+
   const labels: NavItem[] = [
     { id: 1, label: "home", path: "#home" },
     { id: 2, label: "about", path: "#about" },
@@ -34,7 +43,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`flex justify-between items-center w-full h-20 px-4 fixed z-10 shadow-lg ${isDarkMode ? 'text-white bg-black': 'text-black bg-white'}`}>
+    <nav className={`flex justify-between items-center w-full h-20 px-4 fixed z-10 shadow-lg dark:bg-black dark:text-white bg-white text-black}`}>
       <div>
         <h1 className="text-5xl font-signature ml-2">Prathamesh</h1>
       </div>
@@ -43,7 +52,7 @@ const Navbar = () => {
         {labels.map(({ id, label, path }) => (
           <li
             key={id}
-            className="px-4 cursor-pointer capitalize font-semibold text-gray-700 hover:scale-105 hover:text-black duration-200"
+            className="px-4 cursor-pointer capitalize font-semibold duration-200 hover:scale-105"
           >
             <Link href={path} aria-label={`Go to ${label}`}>
               {label}
