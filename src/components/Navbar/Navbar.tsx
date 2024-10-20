@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaMoon, FaSun, FaTimes } from "react-icons/fa";
+import { CiLight } from "react-icons/ci";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { toggleTheme } from "@/store/themeSlice";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 interface NavItem {
   id: number;
@@ -43,38 +45,62 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`flex justify-between items-center w-full h-20 px-4 fixed z-10 shadow-lg dark:bg-black dark:text-white bg-white text-black}`}>
+    <motion.nav 
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1}}
+      transition={{ duration: 0.5 }}
+      className={`flex justify-between items-center w-full h-20 px-4 fixed z-10 shadow-lg dark:bg-black dark:text-white bg-white text-black}`}
+    >
       <div>
         <h1 className="text-5xl font-signature ml-2">Prathamesh</h1>
       </div>
 
       <ul className="hidden md:flex">
         {labels.map(({ id, label, path }) => (
-          <li
+          <motion.li
             key={id}
             className="px-4 cursor-pointer capitalize font-semibold duration-200 hover:scale-105"
+            whileHover={{ scale: 1.1 }}
           >
             <Link href={path} aria-label={`Go to ${label}`}>
               {label}
             </Link>
-          </li>
+          </motion.li>
         ))}
       </ul>
 
-        <button onClick={handleToggleTheme}>
-          Switch to { isDarkMode ? 'light Mode' : 'Dark Mode'}
-        </button>
+
+      {/* Dark Mode Toggle */}
+      <div
+        className="cursor-pointer text-xl p-2 rounded-md border hidden md:block dark:border-white border-black"
+        aria-label="Toggle Dark Mode"
+      >
+      <motion.div
+        onClick={handleToggleTheme}
+        whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
+        aria-label="Toggle Dark Mode"
+      >
+        {isDarkMode ? <CiLight className="text-white" /> : <FaMoon className="text-gray-800" />}
+      </motion.div>
+      </div>
 
       <div
         onClick={() => setNav(!nav)}
-        className="cursor-pointer pr-4 z-10 text-black md:hidden"
+        className={`cursor-pointer pr-4 z-10 md:hidden p-2 rounded-md`}
         aria-label="Menu"
       >
-        {nav ? <FaTimes size={30} color="black" /> : <FaBars size={30} color="black" />}
+        {nav ? <FaTimes size={30} color={isDarkMode ? "white" : "black"} /> : <FaBars size={30} color={isDarkMode ? "white" : "black"} />}
       </div>
 
       {nav && (
-        <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-white text-black z-8">
+        <motion.ul 
+          initial={{ x: "-100vw" }}
+          animate={{ x: 0 }}
+          transition={{ type: "spring", stiffness: 120 }}
+          className={`flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-white text-black z-8 ${
+            isDarkMode ? "bg-black text-white" : "bg-white text-black"
+          }`}
+        >
           {labels.map(({ id, label, path }) => (
             <li key={id} className="px-4 cursor-pointer capitalize py-6 text-4xl">
               <Link href={path} onClick={() => setNav(!nav)} aria-label={`Go to ${label}`}>
@@ -82,9 +108,9 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
-        </ul>
+        </motion.ul>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 
