@@ -78,7 +78,10 @@ const TextInput = ({
         placeholder={type === "date" && !isFocused ? "" : placeholder}
         InputLabelProps={{
           shrink: type === "date" || value ? true : undefined,
-          style: { color: disabled ? "#808080" : "#808AA8", zIndex: "5" },
+          style: {
+            color: disabled ? "#808080" : isDarkMode ? "white" : "#808AA8",
+            zIndex: "5",
+          },
         }}
         InputProps={{
           inputProps: {

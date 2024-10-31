@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { TextField } from "@mui/material";
 
 const TextareaInput = ({
@@ -11,8 +11,13 @@ const TextareaInput = ({
   rows,
   placeholder,
   required,
-  maxLength = 250,
+  maxLength = 400,
+  className,
+  disabled,
+  isDarkMode,
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <div>
       <TextField
@@ -23,22 +28,38 @@ const TextareaInput = ({
         }
         name={name}
         value={value}
-        onBlur={onBlur}
+        onBlur={(e) => {
+          onBlur(e);
+          setIsFocused(false);
+        }}
         onChange={onChange}
         placeholder={placeholder}
         multiline
         rows={rows}
         variant="outlined"
         fullWidth
-        InputProps={{
+        onFocus={() => setIsFocused(true)}
+        InputLabelProps={{
+          shrink: value ? true : undefined,
           style: {
-            borderColor: "#CACFDC",
-            padding: "10px",
+            color: disabled ? "#808080" : isDarkMode ? "white" : "#808aa8",
           },
         }}
-        className="mb-4 bg-transparent rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
+        InputProps={{
+          style: {
+            color: isDarkMode ? "white" : "black",
+          },
+          className: `${disabled ? "bg-gray-100" : ""} ${
+            isFocused ? "border-blue-500" : ""
+          }`,
+        }}
+        className={`w-full text-[#173048] text-base font-normal font-inter ${className} bg-transparent border rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600`}
+        disabled={disabled}
         inputProps={{
           maxLength: maxLength,
+          style: {
+            color: isDarkMode ? "white" : "black",
+          },
         }}
       />
     </div>

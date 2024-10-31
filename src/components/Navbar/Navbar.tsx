@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaBars, FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import { CiLight } from "react-icons/ci";
 import Link from "next/link";
@@ -16,6 +16,15 @@ interface NavItem {
 }
 
 
+const labels: NavItem[] = [
+  { id: 1, label: "home", path: "#home" },
+  { id: 2, label: "about", path: "#about" },
+  { id: 3, label: "portfolio", path: "#portfolio" },
+  { id: 4, label: "experience", path: "#experience" },
+  { id: 5, label: "contact", path: "#contact" },
+];
+
+
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const dispatch = useDispatch();
@@ -23,9 +32,13 @@ const Navbar = () => {
 
   console.log(isDarkMode, "this is reduz");
 
-  const handleToggleTheme = () => {
+  const handleToggleTheme = useCallback(() => {
     dispatch(toggleTheme());
-  };
+  }, [dispatch]);
+
+  const handleNavToggle = useCallback(() => {
+    setNav((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -34,15 +47,6 @@ const Navbar = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
-  
-
-  const labels: NavItem[] = [
-    { id: 1, label: "home", path: "#home" },
-    { id: 2, label: "about", path: "#about" },
-    { id: 3, label: "portfolio", path: "#portfolio" },
-    { id: 4, label: "experience", path: "#experience" },
-    { id: 5, label: "contact", path: "#contact" },
-  ];
 
   return (
     <motion.nav 
@@ -85,7 +89,7 @@ const Navbar = () => {
       </div>
 
       <div
-        onClick={() => setNav(!nav)}
+        onClick={handleNavToggle}
         className={`cursor-pointer pr-4 z-10 md:hidden p-2 rounded-md`}
         aria-label="Menu"
       >

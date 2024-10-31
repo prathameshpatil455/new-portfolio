@@ -11,6 +11,7 @@ import CustomCursor from "@/components/CustomCursor/CustomCursor";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import useLenis from "@/hooks/useLenis";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
 
@@ -19,6 +20,7 @@ export default function Home() {
   return (
     <Provider store={store}>
     <div className="overflow-hidden">
+      <ToastContainer />
       <Navbar/>
       <SocialLinks/>
       <CustomCursor />
