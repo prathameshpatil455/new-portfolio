@@ -75,7 +75,7 @@ const SocialLinks = () => {
             transition={{ delay: id * 0.1, duration: 0.5}}
             className={
               `flex justify-between items-center w-40 h-14 px-4 ml-[-100px] hover:ml-[-10px] hover:rounded-lg duration-500 border ${
-                isDarkMode ? 'bg-gray-800 text-white border-gray-200'
+                isDarkMode ? 'bg-black text-white border-gray-200'
                 : 'bg-white text-black border-black'
               } ${style} `
             }

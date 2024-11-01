@@ -89,6 +89,7 @@ const Contact = () => {
   };
 
   return (
+    <section id="contact">
     <div
       className={`box-border w-full h-full ${
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
@@ -170,6 +171,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };
 

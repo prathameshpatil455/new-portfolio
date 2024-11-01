@@ -107,6 +107,7 @@ const Portfolio = () => {
   const { title, content, tags } = portfolios[currentProjectIndex];
 
   return (
+    <section id="portfolio">
     <div
       className={`w-full pt-28 md:pt-[100px] md:min-h-screen ${
         isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
@@ -215,6 +216,7 @@ const Portfolio = () => {
         </AnimatedBox>
       </div>
     </div>
+    </section>
   );
 };
 

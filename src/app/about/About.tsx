@@ -7,6 +7,7 @@ import Info from "@/components/Info/Info";
 
 const About = () => {
   return (
+    <section id="about">
     <div className="h-screen w-full bg-white text-black pt-28">
       <div className="max-w-screen-lg mx-auto py-2 px-4 md:px-8 lg:px-10">
         <div className="flex flex-col items-center justify-center mb-8 md:mb-10">
@@ -31,6 +32,7 @@ const About = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };
 

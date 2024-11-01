@@ -16,18 +16,18 @@ const InfoCard = () => {
       exit={{ scale: 0.8 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className={`text-lg font-semibold ${isDarkMode ? "text-white" : "text-black"}`}>Contact Information</h3>
+      <h3 className={`text-lg font-semibold ${isDarkMode ? "text-white" : "text-black"}`}>Additional Information</h3>
       <div className="flex flex-col gap-2">
         <ContactInfoCard
           icon={<FaPhoneAlt />}
           title="Phone"
-          text="(123) 456-7890"
+          text="8296635729"
           isDarkMode={isDarkMode} // Pass isDarkMode prop
         />
         <ContactInfoCard
           icon={<FaEnvelope />}
           title="Email"
-          text="example@example.com"
+          text="prathameshpatil1513@gmail.com"
           isDarkMode={isDarkMode} // Pass isDarkMode prop
         />
         <ContactInfoCard
@@ -39,7 +39,7 @@ const InfoCard = () => {
         <ContactInfoCard
           icon={<FaMapMarkerAlt />}
           title="Address"
-          text="1234 Street Name, City, Country"
+          text="Banglore, India"
           isDarkMode={isDarkMode} // Pass isDarkMode prop
         />
       </div>

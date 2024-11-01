@@ -98,6 +98,7 @@ const Experience = () => {
   
   
   return (
+    <section id="experience">
     <div className="bg-white dark:bg-gray-800 w-full h-screen pt-32 max-sm:pt-72">
       <div className="max-w-screen-lg mx-auto p-4 flex flex-col h-full text-black dark:text-white">
         <div>
@@ -159,6 +160,7 @@ const Experience = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };
 
