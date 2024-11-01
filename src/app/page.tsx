@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import store from "@/store/store";
 import useLenis from "@/hooks/useLenis";
 import { ToastContainer } from "react-toastify";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 export default function Home() {
 
@@ -25,11 +26,13 @@ export default function Home() {
       <SocialLinks/>
       <CustomCursor />
       <main>
+        <ErrorBoundary>
         <HomePage />
         <About/>
         <Experience/>
         <Portfolio/>
         <Contact/>
+        </ErrorBoundary>
       </main>
     </div>
     </Provider>

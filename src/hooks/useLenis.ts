@@ -21,6 +21,8 @@ const useLenis = () => {
       lenis.destroy();
     };
   }, []);
+
+  return "test scroll";
 };
 
 export default useLenis;

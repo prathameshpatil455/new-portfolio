@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import TextInput from "@/components/TextInput/TextInput";
 import TextareaInput from "@/components/TextareaInput/TextareaInput";
 import { useSelector } from "react-redux";
+import InfoCard from "@/components/InfoCard";
 
 interface FormValues {
   first_name: string;
@@ -95,17 +96,19 @@ const Contact = () => {
     >
       <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto">
         <div className="pb-2">
-          <p
-            className={`text-4xl font-bold inline border-b-4 ${
-              isDarkMode ? "border-white" : "border-black"
-            }`}
+        <motion.p
+            className={`text-4xl font-bold inline border-b-4 ${isDarkMode ? "border-white" : "border-black"}`}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
             Contact
-          </p>
+          </motion.p>
           <p className="py-6">Submit the form below to get in touch with me</p>
         </div>
 
-        <div className="flex justify-center items-center">
+        <div className="flex justify-between items-center">
+          <InfoCard />
           <form
             onSubmit={handleFormSubmit}
             className="flex flex-col gap-4 w-full md:w-1/2"
