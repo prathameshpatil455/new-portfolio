@@ -53,12 +53,12 @@ const Navbar = () => {
     }
   }, [isDarkMode]);
 
-  // const handleScrollToSection = (path) => {
-  //   const section = document.querySelector(path);
-  //   if (section) {
-  //     section.scrollIntoView({ behavior: "smooth", block: "start" });
-  //   }
-  // };
+  const handleScrollToSection = (path) => {
+    const section = document.querySelector(path);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   console.log(pathname, "path name")
   
@@ -68,13 +68,13 @@ const Navbar = () => {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1}}
       transition={{ duration: 0.5 }}
-      className={`flex justify-center items-center w-full h-20 px-4 fixed z-10 shadow-lg dark:bg-black dark:text-white bg-white text-black}`}
+      className={`flex justify-center items-center w-full h-20 px-4 fixed z-10 dark:bg-black dark:text-white bg-white text-black}`}
     >
       {/* <div>
         <h1 className="text-5xl font-signature ml-2">Prathamesh</h1>
       </div> */}
 
-        <div className="flex items-center rounded-full border border-gray-300 dark:border-gray-600 px-6 py-2">
+        <div className="flex items-center rounded-full border-2 border-gray-300 dark:border-gray-600 px-6 py-2">
       <ul className="hidden md:flex gap-4">
         {labels.map(({ id, label, path }, index) => (
           <motion.li
@@ -85,7 +85,8 @@ const Navbar = () => {
                 : ""
             }`}
             whileHover={{ scale: 1.1 }}
-            onClick={() => router.push(path)}
+            // onClick={() => router.push(path)}
+            onClick={() => handleScrollToSection(path)}
           >
             <Link href={path} passHref aria-label={`Go to ${label}`}>
               {label}

@@ -42,7 +42,7 @@ const HomePage = () => {
         >
           <div className="flex flex-col justify-start items-start h-full w-full max-md:pt-36">
             <p className="text-xl md:text-2xl font-medium text-black dark:text-white py-2">Hi, I'm Prathamesh,</p>
-            <h2 className="text-3xl md:text-5xl font-bold text-black dark:text-white">
+            <h2 className="text-4xl md:text-6xl font-bold text-black dark:text-white">
               A Software Developer
               {/* <TypingEffect /> */}
             </h2>
