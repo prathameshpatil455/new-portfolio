@@ -43,6 +43,83 @@ body {
   background-color: #333;
 }
 
+/* Fullscreen background grid */
+.mesh-grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(30, 1fr); /* Adjust for density */
+  grid-template-rows: repeat(30, 1fr);
+  gap: 1px;
+  z-index: -1;
+  background-color: #000;
+  pointer-events: none; /* Make sure it doesn't block interactions */
+}
+
+.mesh-grid-background .grid-cell {
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Light border for interconnected effect */  
+}
+
+.mesh-grid-background::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 2%, transparent 3%);
+  background-size: 100px 100px; /* Adjust for glow size */
+  animation: lightFlow 8s linear infinite;
+  opacity: 0.6;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+.timeline-container {
+  position: relative;
+  overflow-y: hidden;
+}
+
+.timeline-line {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-card {
+  position: relative;
+  width: 40%;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  opacity: 0;
+}
+
+.left-card {
+  left: -50%;
+}
+
+.right-card {
+  left: 50%;
+}
+
+
+
+/* Animate the light flow across the grid */
+@keyframes lightFlow {
+  0% {
+    transform: translate(-100%, -100%);
+  }
+  100% {
+    transform: translate(100%, 100%);
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

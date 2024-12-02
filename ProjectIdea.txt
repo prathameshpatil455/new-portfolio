@@ -8,6 +8,7 @@ The frameworks we will use in our project are
 
  additional frameworks to improve my project
 
+
  - Three.js ( to have some 3d design )
  - smooth scrolling ( GSAP and )
  - Dark and light mode

@@ -90,87 +90,91 @@ const Contact = () => {
 
   return (
     <section id="contact">
-    <div
-      className={`box-border w-full h-full ${
-        isDarkMode ? "bg-black text-white" : "bg-white text-black"
-      } pt-16 pb-12 px-8`}
-    >
-      <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto">
-        <div className="pb-2">
-        <motion.p
-            className={`text-4xl font-bold inline border-b-4 ${isDarkMode ? "border-white" : "border-black"}`}
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            Contact
-          </motion.p>
-          <p className="py-6">Submit the form below to get in touch with me</p>
-        </div>
-
-        <div className="flex justify-between items-center">
-          <InfoCard />
-          <form
-            onSubmit={handleFormSubmit}
-            className="flex flex-col gap-4 w-full md:w-1/2"
-          >
-            <div className="flex flex-col md:flex-row w-full gap-4">
-              <div className="w-full">
-                <TextInput
-                  label="First Name"
-                  name="first_name"
-                  placeholder="First name"
-                  value={formik.values.first_name}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  isDarkMode={isDarkMode}
-                  type="text"
-                />
-              </div>
-              <div className="w-full">
-                <TextInput
-                  label="Last Name"
-                  name="last_name"
-                  placeholder="Last name"
-                  value={formik.values.last_name}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  isDarkMode={isDarkMode}
-                />
-              </div>
-            </div>
-            <TextInput
-              label="Email"
-              name="email"
-              placeholder="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              isDarkMode={isDarkMode}
-            />
-            <TextareaInput
-              label="Message"
-              name="message"
-              placeholder="Message"
-              rows={8}
-              value={formik.values.message}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              isDarkMode={isDarkMode}
-            />
-            <button
-              type="submit"
-              className={`w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 ${
-                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+      <div
+        className={`box-border w-full h-full ${
+          isDarkMode ? "bg-black text-white" : "bg-white text-black"
+        } pt-16 pb-12 px-8`}
+      >
+        <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto">
+          <div className="pb-2">
+            <motion.p
+              className={`text-4xl font-bold inline border-b-4 ${
+                isDarkMode ? "border-white" : "border-black"
               }`}
-              disabled={isSubmitting} // Disable when submitting
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
-              {isSubmitting ? "Submitting..." : "Let's talk"}
-            </button>
-          </form>
+              Contact
+            </motion.p>
+            <p className="py-6">
+              Submit the form below to get in touch with me
+            </p>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <InfoCard />
+            <form
+              onSubmit={handleFormSubmit}
+              className="flex flex-col gap-4 w-full md:w-1/2"
+            >
+              <div className="flex flex-col md:flex-row w-full gap-4">
+                <div className="w-full">
+                  <TextInput
+                    label="First Name"
+                    name="first_name"
+                    placeholder="First name"
+                    value={formik.values.first_name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isDarkMode={isDarkMode}
+                    type="text"
+                  />
+                </div>
+                <div className="w-full">
+                  <TextInput
+                    label="Last Name"
+                    name="last_name"
+                    placeholder="Last name"
+                    value={formik.values.last_name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    isDarkMode={isDarkMode}
+                  />
+                </div>
+              </div>
+              <TextInput
+                label="Email"
+                name="email"
+                placeholder="Email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                isDarkMode={isDarkMode}
+              />
+              <TextareaInput
+                label="Message"
+                name="message"
+                placeholder="Message"
+                rows={8}
+                value={formik.values.message}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                isDarkMode={isDarkMode}
+              />
+              <button
+                type="submit"
+                className={`w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 ${
+                  isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={isSubmitting} // Disable when submitting
+              >
+                {isSubmitting ? "Submitting..." : "Let's talk"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </section>
   );
 };

@@ -1,5 +1,10 @@
 import { motion } from "framer-motion";
-import { FaPhoneAlt, FaEnvelope, FaTwitter, FaMapMarkerAlt } from "react-icons/fa"; // Import icons
+import {
+  FaPhoneAlt,
+  FaEnvelope,
+  FaTwitter,
+  FaMapMarkerAlt,
+} from "react-icons/fa"; // Import icons
 import ContactInfoCard from "./ContactInfoCard"; // Import the ContactInfoCard component
 import { useSelector } from "react-redux";
 
@@ -10,13 +15,21 @@ const InfoCard = () => {
 
   return (
     <motion.div
-      className={`bg-${isDarkMode ? "gray-900" : "gray-100"} rounded-lg p-4 shadow-md h-full flex flex-col gap-4 justify-between`}
+      className={`${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+      } rounded-lg p-4 shadow-md h-full flex flex-col gap-4 justify-between`}
       initial={{ scale: 0.8 }}
       animate={{ scale: 1 }}
       exit={{ scale: 0.8 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className={`text-lg font-semibold ${isDarkMode ? "text-white" : "text-black"}`}>Additional Information</h3>
+      <h3
+        className={`text-lg font-semibold ${
+          isDarkMode ? "text-white" : "text-black"
+        }`}
+      >
+        Additional Information
+      </h3>
       <div className="flex flex-col gap-2">
         <ContactInfoCard
           icon={<FaPhoneAlt />}
@@ -43,7 +56,9 @@ const InfoCard = () => {
           isDarkMode={isDarkMode} // Pass isDarkMode prop
         />
       </div>
-      <p className={`mt-4 ${isDarkMode ? "text-gray-400" : "text-black"}`}>&copy; 2024 Prathamesh Patil. All rights reserved.</p>
+      <p className={`mt-4 ${isDarkMode ? "text-gray-400" : "text-black"}`}>
+        &copy; 2024 Prathamesh Patil. All rights reserved.
+      </p>
     </motion.div>
   );
 };

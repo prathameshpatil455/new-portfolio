@@ -21,13 +21,18 @@ const HomePage = () => {
   );
 
   return (
-    <section id="home">
+    <section id="home"  className="relative overflow-hidden">
+      {/* Background grid */}
+      {/* <div className="mesh-grid-background">
+        <div className="grid-cell"></div>
+      </div> */}
+
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
-      className="h-screen w-full bg-white dark:bg-black box-border"
+      className="relative h-screen w-full bg-transparent bg-white dark:bg-black box-border"
     >
       {/* <InteractiveShapes /> */}
       {/* main content */}
