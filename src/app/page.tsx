@@ -13,28 +13,28 @@ import store from "@/store/store";
 import useLenis from "@/hooks/useLenis";
 import { ToastContainer } from "react-toastify";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import ExperienceDraft from "./experience/ExperienceDraft";
 
 export default function Home() {
-
   useLenis();
-  
+
   return (
     <Provider store={store}>
-    <div className="overflow-hidden">
-      <ToastContainer />
-      <Navbar/>
-      <SocialLinks/>
-      <CustomCursor />
-      <main>
-        <ErrorBoundary>
-        <HomePage />
-        <About/>
-        <Experience/>
-        <Portfolio/>
-        <Contact/>
-        </ErrorBoundary>
-      </main>
-    </div>
+      <div className="overflow-hidden">
+        <ToastContainer />
+        <Navbar />
+        <SocialLinks />
+        <CustomCursor />
+        <main>
+          <ErrorBoundary>
+            <HomePage />
+            <About />
+            <ExperienceDraft />
+            <Portfolio />
+            <Contact />
+          </ErrorBoundary>
+        </main>
+      </div>
     </Provider>
   );
 }

@@ -91,7 +91,7 @@ const Contact = () => {
   return (
     <section id="contact">
       <div
-        className={`box-border w-full h-full ${
+        className={`box-border w-full h-screen ${
           isDarkMode ? "bg-black text-white" : "bg-white text-black"
         } pt-16 pb-12 px-8`}
       >

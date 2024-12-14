@@ -2,61 +2,70 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useSelector } from "react-redux";
 
 const CustomCursor: React.FC = () => {
-    const [isHovered, setIsHovered] = useState(false);
-    const [cursorColor, setCursorColor] = useState('gray');
-    const cursorX = useMotionValue(-100);
-    const cursorY = useMotionValue(-100);
-    const springConfig = { damping: 25, stiffness: 500 };
-    const outerCursorX = useSpring(cursorX, { damping: 20, stiffness: 300 });
-    const outerCursorY = useSpring(cursorY, { damping: 20, stiffness: 300 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [cursorColor, setCursorColor] = useState("gray");
+  const isDarkMode = useSelector(
+    (state: { theme: { isDarkMode: boolean } }) => state.theme.isDarkMode
+  ); // Replace with your theme logic
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const springConfig = { damping: 25, stiffness: 500 };
+  const outerCursorX = useSpring(cursorX, { damping: 20, stiffness: 300 });
+  const outerCursorY = useSpring(cursorY, { damping: 20, stiffness: 300 });
 
-    useEffect(() => {
-        const moveCursor = (e: MouseEvent) => {
-          cursorX.set(e.clientX);
-          cursorY.set(e.clientY);
-        };
-        
-        window.addEventListener("mousemove", moveCursor);
-        return () => {
-          window.removeEventListener("mousemove", moveCursor);
-        };
-      }, [cursorX, cursorY]);
-
-    useEffect(() => {
-        document.body.style.cursor = "none";
-        return () => {
-            document.body.style.cursor = "default";
-        } 
-    }, []);
-
-    const handleMouseEnter = (e: React.MouseEvent) => {
-        const backgroundColor = getComputedStyle(e.currentTarget).backgroundColor;
-        setCursorColor(backgroundColor === "rgba(0, 0, 0, 0)" ? "gray" : backgroundColor);
-        setIsHovered(true);
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-        setCursorColor("gray");
+    window.addEventListener("mousemove", moveCursor);
+    return () => {
+      window.removeEventListener("mousemove", moveCursor);
     };
+  }, [cursorX, cursorY]);
 
-    const handleClick = () => {
-        setCursorColor("blue");
-        setTimeout(() => setCursorColor("gray"), 100);
-    }
+  useEffect(() => {
+    document.body.style.cursor = "none";
+    return () => {
+      document.body.style.cursor = "default";
+    };
+  }, []);
+
+  const handleMouseEnter = (e: React.MouseEvent) => {
+    const backgroundColor = getComputedStyle(e.currentTarget).backgroundColor;
+    setCursorColor(
+      backgroundColor === "rgba(0, 0, 0, 0)" ? "gray" : backgroundColor
+    );
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setCursorColor("gray");
+  };
+
+  const handleClick = () => {
+    setCursorColor(isDarkMode ? "blue" : "darkblue");
+    setTimeout(() => setCursorColor("gray"), 100);
+  };
 
   return (
     <>
-    <motion.div
+      <motion.div
         style={{
           x: outerCursorX,
           y: outerCursorY,
           translateX: "-50%",
           translateY: "-50%",
+          borderColor: isDarkMode ? "white" : "black",
         }}
-        className={`fixed pointer-events-none z-50 rounded-full w-[35px] h-[35px] border-2 border-gray-700 ${isHovered ? "scale-1.5" : ""}`}
+        className={`fixed pointer-events-none z-50 rounded-full w-[35px] h-[35px] border-2 border-gray-700 ${
+          isHovered ? "scale-1.5" : ""
+        }`}
         animate={{
           scale: isHovered ? 1.5 : 1,
         }}
@@ -72,6 +81,7 @@ const CustomCursor: React.FC = () => {
           y: cursorY,
           translateX: "-50%",
           translateY: "-50%",
+          backgroundColor: isDarkMode ? "white" : "black",
         }}
         className="fixed pointer-events-none z-50 rounded-full w-[8px] h-[8px] bg-gray-700"
         onMouseEnter={() => setIsHovered(true)}

@@ -80,32 +80,33 @@ html {
 }
 
 
+/* Ensure the right section scrolls independently */
 .timeline-container {
-  position: relative;
+  overflow-y: auto;
+  height: 100%; /* Take full height of parent container */
+  padding-right: 10px; /* Prevent scrollbar overlap */
+}
+
+/* Style for timeline cards */
+.timeline-card {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Ensure smooth scrolling */
+.right-section {
   overflow-y: hidden;
 }
 
-.timeline-line {
-  left: 50%;
-  transform: translateX(-50%);
-}
+@media (max-width: 768px) {
+  .vertical-timeline-element-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 
-.timeline-card {
-  position: relative;
-  width: 40%;
-  padding: 1rem;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-  opacity: 0;
-}
-
-.left-card {
-  left: -50%;
-}
-
-.right-card {
-  left: 50%;
+  .vertical-timeline-element-content .date-label {
+    text-align: center;
+    margin-bottom: 10px;
+  }
 }
 
 

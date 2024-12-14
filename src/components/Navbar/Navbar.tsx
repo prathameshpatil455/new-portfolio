@@ -27,6 +27,9 @@ const labels: NavItem[] = [
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   const dispatch = useDispatch();
   const isDarkMode = useSelector(
     (state: { theme: { isDarkMode: boolean } }) => state.theme.isDarkMode
@@ -52,13 +55,6 @@ const Navbar = () => {
     }
   }, [isDarkMode]);
 
-  // const handleScrollToSection = (path) => {
-  //   const section = document.querySelector(path);
-  //   if (section) {
-  //     section.scrollIntoView({ behavior: "smooth", block: "start" });
-  //   }
-  // };
-
   const handleScrollToSection = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     path: string
@@ -71,17 +67,43 @@ const Navbar = () => {
     }
   };
 
+  // Track scroll direction to toggle navbar visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY) {
+        // Scrolling down: hide navbar
+        setIsNavbarVisible(false);
+      } else {
+        // Scrolling up: show navbar
+        setIsNavbarVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   console.log(pathname, "path name");
 
   return (
     <motion.nav
       initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className={`flex justify-end md:justify-center items-center w-full h-20 px-4 fixed z-10 dark:bg-black dark:text-white bg-white text-black`}
+      animate={{
+        y: isNavbarVisible ? 0 : -100, // Slide out of view when not visible
+        opacity: isNavbarVisible ? 1 : 0, // Fade out
+      }}
+      transition={{ duration: 0.3 }}
+      className={`flex justify-end md:justify-center items-center w-full h-20 px-4 fixed z-10 `}
     >
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center rounded-full border border-black dark:border-white px-6 py-2">
+      <div className="hidden md:flex items-center rounded-full border border-black dark:border-white px-6 py-2 dark:bg-black dark:text-white bg-white text-black">
         <ul className="flex gap-4">
           {labels.map(({ id, label, path }) => (
             <motion.li
@@ -103,7 +125,7 @@ const Navbar = () => {
 
       {/* Theme Toggle for Large Screens */}
       <div
-        className="hidden md:block cursor-pointer ml-4 text-xl p-2 rounded-md border dark:border-white border-black"
+        className="hidden md:block cursor-pointer ml-4 text-xl p-2 rounded-md border dark:border-white border-black dark:bg-black dark:text-white bg-white text-black"
         aria-label="Toggle Dark Mode"
         onClick={handleToggleTheme}
       >

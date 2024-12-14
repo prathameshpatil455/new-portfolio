@@ -8,6 +8,14 @@ import { useSelector } from "react-redux";
 import useTimelineAnimation from "../../hooks/useTimelineAnimtion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
+import { MdWork } from "react-icons/md";
+import Timeline from "@/components/TimelineComponent/Timeline";
+import { timelineData } from "@/Constants/TimelineData";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,17 +26,29 @@ const About = () => {
     (state: { theme: { isDarkMode: boolean } }) => state.theme
   );
 
-  const timelineData = [
-    { title: "Started Learning Web Dev", description: "Year: 2020" },
-    { title: "First Job at XYZ", description: "Year: 2021" },
-    { title: "Completed 30+ Projects", description: "Year: 2023" },
-  ];
-
   useEffect(() => {
-    const timelineLine = document.querySelector(".timeline-line");
     const timelineCards = document.querySelectorAll(".timeline-card");
 
-    // Scroll-triggered animation for timeline line
+    timelineCards.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 50 }, // Start state: invisible and slightly shifted down
+        {
+          opacity: 1,
+          y: 0, // End state: visible and aligned
+          duration: 0.8,
+          ease: "power1.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%", // Start animation when the card is near the viewport
+            toggleActions: "play none none reverse", // Only play forward and reverse on scroll
+          },
+        }
+      );
+    });
+
+    // Timeline Line Animation
+    const timelineLine = document.querySelector(".timeline-line");
     gsap.fromTo(
       timelineLine,
       { height: "0%" },
@@ -43,38 +63,6 @@ const About = () => {
         },
       }
     );
-
-    // animate each timeline card as you scroll
-    timelineCards.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            end: "top 60%",
-            toggleActions: "play reverse play reverse",
-          },
-        }
-      );
-    });
-
-    // Pin the right section until timeline ends
-    ScrollTrigger.create({
-      trigger: "#timeline-container",
-      start: "top top", // Start when the timeline container hits the top of the viewport
-      end: "bottom bottom", // End when the timeline reaches the bottom of the viewport
-      pin: ".right-section", // Pin the right section while the timeline is visible
-      pinSpacing: false, // Disable extra spacing after the pin
-      onComplete: () => {
-        // Unlock scrolling after the timeline ends
-        document.body.style.overflow = "auto"; // Allow body to scroll
-      },
-    });
   }, []);
 
   return (
@@ -102,7 +90,7 @@ const About = () => {
           </p>
         </div> */}
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-12 mx-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-20 mx-8">
           {/* left section */}
           <div className="left-section w-full md:w-1/3 flex flex-col justify-center items-center sticky top-28">
             <Image
@@ -122,33 +110,40 @@ const About = () => {
 
           {/* <Info /> */}
 
-          <div
-            className="right-section w-full md:w-2/3 relative overflow-y-auto"
+          {/* Right Section - Timeline */}
+          {/* <div
+            className="right-section w-full mx-auto relative overflow-y-auto"
             style={{ maxHeight: "calc(100vh - 112px)" }}
           >
-            <div
-              id="timeline-container"
-              className="timeline-container relative"
-            >
-              <div className="timeline-line absolute top-0 left-1/2 w-1 h-full bg-gray-400 dark:bg-gray-600"></div>
-
+            <VerticalTimeline>
               {timelineData.map((item, index) => (
-                <div
+                <VerticalTimelineElement
                   key={index}
-                  className={`timeline-card ${
-                    index % 2 === 0 ? "left-card" : "right-card"
-                  } absolute`}
-                  // style={{ animationDelay: `${index * 0.2}s` }}
-                  style={{
-                    top: `${(index + 1) * 500}px`, // Adjust the position for scroll effect
+                  className="vertical-timeline-element--work"
+                  contentStyle={{
+                    background: isDarkMode ? "#2d3748" : "#f7fafc",
+                    color: isDarkMode ? "#fff" : "#000",
                   }}
+                  contentArrowStyle={{
+                    borderRight: `7px solid ${
+                      isDarkMode ? "#2d3748" : "#f7fafc"
+                    }`,
+                  }}
+                  iconStyle={{
+                    background: isDarkMode ? "#4a5568" : "#e2e8f0",
+                    color: isDarkMode ? "#fff" : "#000",
+                  }}
+                  icon={<MdWork />}
                 >
-                  <h3 className="font-bold text-lg">{item.title}</h3>
-                  <p className="text-sm mt-2">{item.description}</p>
-                </div>
+                  <h3 className="vertical-timeline-element-title">
+                    {item.title}
+                  </h3>
+                  <p>{item.description}</p>
+                </VerticalTimelineElement>
               ))}
-            </div>
-          </div>
+            </VerticalTimeline>
+          </div> */}
+          {/* <Timeline timelineData={timelineData} isDarkMode={isDarkMode} /> */}
         </div>
       </div>
     </section>
